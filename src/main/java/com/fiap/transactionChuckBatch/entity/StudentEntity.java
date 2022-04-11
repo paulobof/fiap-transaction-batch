@@ -8,23 +8,36 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
 public class StudentEntity {
-    @Id
-    private String id;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private String mobileNumber;
-    @CreatedDate
-    private LocalDateTime createdDate;
-    @LastModifiedDate
-    private LocalDateTime lastModifieDate;
 
-    public String getId() {
+    @Id
+    private Long id;
+    private String name;
+    private Long ra;
+    private String email;
+    private String card;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getRa() {
+        return ra;
+    }
+
+    public void setRa(Long ra) {
+        this.ra = ra;
     }
 
     public String getEmail() {
@@ -35,44 +48,11 @@ public class StudentEntity {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getCard() {
+        return card;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setCard(String card) {
+        this.card = card;
     }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public LocalDateTime getLastModifieDate() {
-        return lastModifieDate;
-    }
-
-    public void setLastModifieDate(LocalDateTime lastModifieDate) {
-        this.lastModifieDate = lastModifieDate;
-    }
-
 }

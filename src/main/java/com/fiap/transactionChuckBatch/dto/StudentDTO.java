@@ -1,10 +1,27 @@
 package com.fiap.transactionChuckBatch.dto;
 
 public class StudentDTO {
+
+    private String name;
+    private Long ra;
     private String email;
-    private String firstName;
-    private String lastName;
-    private String mobileNumber;
+    private String card;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getRa() {
+        return ra;
+    }
+
+    public void setRa(Long ra) {
+        this.ra = ra;
+    }
 
     public String getEmail() {
         return email;
@@ -14,28 +31,11 @@ public class StudentDTO {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getCard() {
+        return card;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setCard(String card) {
+        this.card = card;
     }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-
 }

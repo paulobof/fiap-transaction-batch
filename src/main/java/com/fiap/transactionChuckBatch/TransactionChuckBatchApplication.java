@@ -43,8 +43,8 @@ public class TransactionChuckBatchApplication {
 	@Bean
 	public FlatFileItemReader<StudentDTO> reader() {
 		return new FlatFileItemReaderBuilder<StudentDTO>().name("userItemReader")
-				.resource(new ClassPathResource("user-sample-data.csv")).delimited()
-				.names(new String[] {"email", "firstName", "lastName", "mobileNumber"})
+				.resource(new ClassPathResource("listagem_aluno.csv")).delimited()
+				.names(new String[] {"nome", "ra", "email"})
 				.fieldSetMapper(new BeanWrapperFieldSetMapper<StudentDTO>() {
 					{
 						setTargetType(StudentDTO.class);

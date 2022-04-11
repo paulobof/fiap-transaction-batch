@@ -16,10 +16,10 @@ public class StudentItemProcessor implements ItemProcessor<StudentDTO, StudentEn
         log.info("processing user data.....{}", item);
 
         StudentEntity transformedStudentEntity = new StudentEntity();
-        transformedStudentEntity.setEmail(item.getEmail());
-        transformedStudentEntity.setFirstName(item.getFirstName());
-        transformedStudentEntity.setLastName(item.getLastName());
-        transformedStudentEntity.setMobileNumber(item.getMobileNumber());
+        transformedStudentEntity.setName(item.getName());
+        transformedStudentEntity.setRa(item.getRa());
+        transformedStudentEntity.setEmail("rm" + item.getRa() + "@gmail.com");
+        transformedStudentEntity.setCard(null);
         return transformedStudentEntity;
     }
 
