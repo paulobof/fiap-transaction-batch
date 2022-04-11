@@ -1,9 +1,9 @@
 package com.fiap.transactionChuckBatch;
 
-import com.fiap.transactionChuckBatch.domain.User;
+import com.fiap.transactionChuckBatch.entity.StudentEntity;
 import com.fiap.transactionChuckBatch.listener.JobCompletionNotificationListener;
-import com.fiap.transactionChuckBatch.model.UserDetail;
-import com.fiap.transactionChuckBatch.processor.UserItemProcessor;
+import com.fiap.transactionChuckBatch.dto.StudentDTO;
+import com.fiap.transactionChuckBatch.processor.StudentItemProcessor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -21,7 +21,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.logging.Logger;
@@ -42,28 +41,28 @@ public class TransactionChuckBatchApplication {
 	}
 
 	@Bean
-	public FlatFileItemReader<UserDetail> reader() {
-		return new FlatFileItemReaderBuilder<UserDetail>().name("userItemReader")
+	public FlatFileItemReader<StudentDTO> reader() {
+		return new FlatFileItemReaderBuilder<StudentDTO>().name("userItemReader")
 				.resource(new ClassPathResource("user-sample-data.csv")).delimited()
 				.names(new String[] {"email", "firstName", "lastName", "mobileNumber"})
-				.fieldSetMapper(new BeanWrapperFieldSetMapper<UserDetail>() {
+				.fieldSetMapper(new BeanWrapperFieldSetMapper<StudentDTO>() {
 					{
-						setTargetType(UserDetail.class);
+						setTargetType(StudentDTO.class);
 					}
 				}).build();
 	}
 
 	@Bean
-	public UserItemProcessor processor() {
-		return new UserItemProcessor();
+	public StudentItemProcessor processor() {
+		return new StudentItemProcessor();
 	}
 
 
 	@Bean
-	public Step step1(FlatFileItemReader<UserDetail> itemReader, MongoItemWriter<User> itemWriter)
+	public Step step1(FlatFileItemReader<StudentDTO> itemReader, MongoItemWriter<StudentEntity> itemWriter)
 			throws Exception {
 
-		return this.stepBuilderFactory.get("step1").<UserDetail, User>chunk(5).reader(itemReader)
+		return this.stepBuilderFactory.get("step1").<StudentDTO, StudentEntity>chunk(5).reader(itemReader)
 				.processor(processor()).writer(itemWriter).build();
 	}
 
@@ -76,8 +75,8 @@ public class TransactionChuckBatchApplication {
 	}
 
 	@Bean
-	public MongoItemWriter<User> writer(MongoTemplate mongoTemplate) {
-		return new MongoItemWriterBuilder<User>().template(mongoTemplate).collection("user")
+	public MongoItemWriter<StudentEntity> writer(MongoTemplate mongoTemplate) {
+		return new MongoItemWriterBuilder<StudentEntity>().template(mongoTemplate).collection("user")
 				.build();
 	}
 }

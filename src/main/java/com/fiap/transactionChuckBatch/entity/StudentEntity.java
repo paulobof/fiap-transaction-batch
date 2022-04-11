@@ -1,4 +1,4 @@
-package com.fiap.transactionChuckBatch.domain;
+package com.fiap.transactionChuckBatch.entity;
 
 import java.time.LocalDateTime;
 import org.springframework.data.annotation.CreatedDate;
@@ -7,7 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")
-public class User {
+public class StudentEntity {
     @Id
     private String id;
     private String email;

@@ -1,6 +1,6 @@
-package com.fiap.transactionChuckBatch.model;
+package com.fiap.transactionChuckBatch.dto;
 
-public class UserDetail {
+public class StudentDTO {
     private String email;
     private String firstName;
     private String lastName;
