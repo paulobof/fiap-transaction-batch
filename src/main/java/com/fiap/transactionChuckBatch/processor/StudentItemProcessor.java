@@ -19,7 +19,7 @@ public class StudentItemProcessor implements ItemProcessor<StudentDTO, StudentEn
         transformedStudentEntity.setName(item.getName());
         transformedStudentEntity.setRa(item.getRa());
         transformedStudentEntity.setEmail("rm" + item.getRa() + "@gmail.com");
-        transformedStudentEntity.setCard(null);
+        transformedStudentEntity.setCard("");
         return transformedStudentEntity;
     }
 

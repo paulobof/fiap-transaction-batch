@@ -43,7 +43,9 @@ public class TransactionChuckBatchApplication {
 	@Bean
 	public FlatFileItemReader<StudentDTO> reader() {
 		return new FlatFileItemReaderBuilder<StudentDTO>().name("userItemReader")
-				.resource(new ClassPathResource("listagem_aluno.csv")).delimited()
+				//.resource(new ClassPathResource("listagem_aluno.csv"))
+				.resource(new ClassPathResource("lista_alunos.csv"))
+				.delimited()
 				.names(new String[] {"nome", "ra", "email"})
 				.fieldSetMapper(new BeanWrapperFieldSetMapper<StudentDTO>() {
 					{
@@ -52,12 +54,18 @@ public class TransactionChuckBatchApplication {
 				}).build();
 	}
 
+
+
 	@Bean
 	public StudentItemProcessor processor() {
 		return new StudentItemProcessor();
 	}
 
-
+	@Bean
+	public MongoItemWriter<StudentEntity> writer(MongoTemplate mongoTemplate) {
+		return new MongoItemWriterBuilder<StudentEntity>().template(mongoTemplate).collection("students")
+				.build();
+	}
 	@Bean
 	public Step step1(FlatFileItemReader<StudentDTO> itemReader, MongoItemWriter<StudentEntity> itemWriter)
 			throws Exception {
@@ -74,9 +82,4 @@ public class TransactionChuckBatchApplication {
 				.listener(listener).start(step1).build();
 	}
 
-	@Bean
-	public MongoItemWriter<StudentEntity> writer(MongoTemplate mongoTemplate) {
-		return new MongoItemWriterBuilder<StudentEntity>().template(mongoTemplate).collection("user")
-				.build();
-	}
 }
